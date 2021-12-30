@@ -79,7 +79,7 @@
 
 .contents-line{width:32vw;}
 
-.desktop-feed-box{margin: 30vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); opacity: 0.9; border-radius:1%;}
+.desktop-feed-box{margin: 10vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); opacity: 0.9; border-radius:2%;}
 .desktop-feed-head {width: 100%; height: 8vh; display: flex; align-items: center; justify-content: space-between;}
 .desktop-feed-head .desktop-user-profile {display: flex; align-items: center; padding: 2%; color:rgb(15,15,15)}
 .desktop-feed-head .desktop-user-profile #desktop-user-pic1 {width: 2vw; height: 4vh; background: url("https://i.imgur.com/IXic2Jl.jpg"); background-size: cover; background-position: center; border-radius: 100%;}
@@ -102,33 +102,37 @@
 
 .desktop-feed-reply {margin-left: 1vw; color:rgb(15,15,15)}
 .desktop-time-checker {margin: 5vh 1vw; font-size: small; color: gray;}
-.desktop-blank{height:4vh;}
+.desktop-blank{height:20vh;}
 
 
 
-.user-suggestion-line {width:18vw; margin-top:8vh; position:fixed; top:0; left:59%;}
-.user-suggestion-line .user-container{width:18vw; height:6vh; display:flex; flex-direction:row; text-align:start; align-items:center; margin:auto; padding:1%;}
+.user-suggestion-line {width:20vw; margin-top:10vh; position:fixed; top:0; left:59%;}
+.user-suggestion-line .suggestion-container {width: 100%; height:53vh; background:rgb(15,15,15); opacity:0.9; padding:5%; border-radius:2%;}
+.user-suggestion-line .user-container {width:18vw; height:6vh; display:flex; flex-direction:row; text-align:start; align-items:center; margin:auto; padding:1%;}
 .user-suggestion-line .user-container .profile-img{width:3vw; height:5vh; border-radius:100%; overflow:hidden; flex:1;}
 .user-suggestion-line .user-container .profile-img img{width:100%; height:100%; object-fit:cover;}
-.user-suggestion-line .user-container .profile-desc{flex:4; margin-left:1vw;}
-.user-suggestion-line .user-container .profile-desc .profile-nickname{color:black; font-size: larger;}
-.user-suggestion-line .user-container .profile-desc .profile-name{color:gray;}
-.user-suggestion-line .user-container #switch{width:3vw; height:7vh; flex:1; border-style:none; background:rgb(245, 245, 245); justify-content: flex-end;}
-.user-suggestion-line .user-container #switch #switch-text{color: rgb(0, 81, 255); font-size: 13px; cursor:pointer;}
+.user-suggestion-line .user-container .profile-desc{flex:3; margin-left:1vw;}
+.user-suggestion-line .user-container .profile-desc .profile-nickname{color:white; font-size: larger;}
+.user-suggestion-line .user-container .profile-desc .profile-name{color:white; opacity:0.5;}
+.user-suggestion-line .user-container #logout{width:100%; height:7vh; flex:2; border-style:none; background:transparent; justify-content: flex-end;}
+.user-suggestion-line .user-container #logout #logout-text{color: rgb(60, 111, 255); font-weight:bolder; font-size:medium; cursor:pointer;}
 
-.user-suggestion-line #suggestion{width:18vw; height:5vh; margin:2%; display:flex; justify-content:space-between; align-items:center;}
-.user-suggestion-line #suggestion-text{flex:3; color:lightslategray; font-size:medium; font-weight:bolder;}
-.user-suggestion-line #suggestion-button{flex:1; border:none; font-weight:bolder; background: rgb(245, 245, 245);}
-.user-suggestion-line #suggestion-button span{color: black; font-size:medium;}
+.user-suggestion-line #suggestion{width:18vw; height:5vh; margin:1rem auto auto 1rem; padding:1%; display:flex; justify-content:space-between; align-items:center;}
+.user-suggestion-line #suggestion-text{flex:2; color:white; opacity:0.9; font-size:medium; font-weight:bolder;}
+.user-suggestion-line #suggestion-button{flex:1; border:none; background:transparent;}
+.user-suggestion-line #suggestion-button span{color: rgb(142, 173, 255); opacity:0; font-size:medium;}
 
 .user-suggestion-line .suggestion-candidate{width:18vw; height:5vh; display: flex; flex-direction: row; text-align: start; align-items:center; margin:auto; padding:1%;}
 .user-suggestion-line .suggestion-candidate .candidate-img{width:2vw; height:4vh; border-radius:100%; overflow:hidden; flex:1;}
 .user-suggestion-line .suggestion-candidate .candidate-img img{width:100%; height:100%; object-fit:cover;}
 .user-suggestion-line .suggestion-candidate .candidate-desc{flex:5; margin-left:1vw;}
-.user-suggestion-line .suggestion-candidate .candidate-desc .candidate-nickname{font-size:medium;}
-.user-suggestion-line .suggestion-candidate .candidate-desc .candidate-issue{font-size:smaller; color:gray;}
-.user-suggestion-line .suggestion-candidate .follow-button{width:2vw; height:5vh; flex:1; border-style: none; background: rgb(245, 245, 245); justify-content: flex-end;}
-.user-suggestion-line .suggestion-candidate .follow-button span{color: rgb(0, 81, 255); font-size:13px;}
+.user-suggestion-line .suggestion-candidate .candidate-desc .candidate-nickname{color:white; font-size:medium;}
+.user-suggestion-line .suggestion-candidate .candidate-desc .candidate-issue{font-size:smaller; color:white; opacity:0.5;}
+.user-suggestion-line .suggestion-candidate .follow-button{width:2vw; height:5vh; flex:2; border-style: none; background:transparent; justify-content: flex-end;}
+.user-suggestion-line .suggestion-candidate .follow-button span{color: rgb(60, 111, 255); font-size:medium; font-weight:bolder;}
+
+#TMI {text-align: left; margin-top:1rem; padding:3%;}
+#TMI div {color:darkgray; font-size:x-small;}
 
 @media (max-width: 981px) {
     .desktop-screen{display:none;}

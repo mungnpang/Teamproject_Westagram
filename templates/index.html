@@ -131,8 +131,8 @@
     </div>
 
     <div class="all-items">
+        {% for feed in feeds %}
         <div class="contents-line">
-            {% for feed in feeds %}
             <div class="desktop-feed-box">
                 <div class="desktop-feed-head">
                     <div class="desktop-user-profile">
@@ -163,100 +163,102 @@
                     <div class="desktop-time-checker">5시간 전</div>
                 </div>
             </div>
-            {% endfor %}
+            <div class="desktop-blank"></div>
         </div>
-
+        {% endfor %}
 
 
         <div class="user-suggestion-line">
-            <div class="user-container">
-                <div class="profile-img">
-                    <img class="profile" src="https://i.imgur.com/IXic2Jl.jpg">
+            <div class="suggestion-container">
+                <div class="user-container">
+                    <div class="profile-img">
+                        <img class="profile" src="https://i.imgur.com/IXic2Jl.jpg">
+                    </div>
+                    <div class="profile-desc">
+                        <div class="profile-nickname">tomntoms</div>
+                        <div class="profile-name">톰사장</div>
+                    </div>
+                    <button onclick="logout()" id="logout">
+                        <span id="logout-text">로그아웃</span>
+                    </button>
                 </div>
-                <div class="profile-desc">
-                    <div class="profile-nickname">tomntoms</div>
-                    <div class="profile-name">톰사장</div>
-                </div>
-                <button onclick="logout()" id="switch">
-                    <span id="switch-text">로그아웃</span>
-                </button>
-            </div>
 
-            <div id="suggestion">
-                <div id="suggestion-text">회원님을 위한 추천</div>
-                <button id="suggestion-button">
-                    <span>모두 보기</span>
-                </button>
-            </div>
+                <div id="suggestion">
+                    <div id="suggestion-text">회원님을 위한 추천</div>
+                    <button id="suggestion-button">
+                        <span>모두 보기</span>
+                    </button>
+                </div>
 
-            <div>
-                <div class="suggestion-candidate">
-                    <div class="candidate-img">
-                        <img src="https://i.imgur.com/doPF2xK.jpg">
+                <div>
+                    <div class="suggestion-candidate">
+                        <div class="candidate-img">
+                            <img src="https://i.imgur.com/doPF2xK.jpg">
+                        </div>
+                        <div class="candidate-desc">
+                            <div class="candidate-nickname">jerry_theKing</div>
+                            <div class="candidate-issue">회원님을 놀리려합니다.</div>
+                        </div>
+                        <button class="follow-button">
+                            <span>팔로우</span>
+                        </button>
                     </div>
-                    <div class="candidate-desc">
-                        <div class="candidate-nickname">jerry_theKing</div>
-                        <div class="candidate-issue">회원님을 놀리려합니다.</div>
+                    <div class="suggestion-candidate">
+                        <div class="candidate-img">
+                            <img src="https://i.imgur.com/FMKfMwv.png">
+                        </div>
+                        <div class="candidate-desc">
+                            <div class="candidate-nickname">lovely_kitty</div>
+                            <div class="candidate-issue">회원님을 유혹하려합니다.</div>
+                        </div>
+                        <button class="follow-button">
+                            <span>팔로우</span>
+                        </button>
                     </div>
-                    <button class="follow-button">
-                        <span>팔로우</span>
-                    </button>
+                    <div class="suggestion-candidate">
+                        <div class="candidate-img">
+                            <img src="https://i.imgur.com/yj8JnrI.jpg">
+                        </div>
+                        <div class="candidate-desc">
+                            <div class="candidate-nickname">fear_me365</div>
+                            <div class="candidate-issue">회원님을 조지려합니다.</div>
+                        </div>
+                        <button class="follow-button">
+                            <span>팔로우</span>
+                        </button>
+                    </div>
+                    <div class="suggestion-candidate">
+                        <div class="candidate-img">
+                            <img src="https://i.imgur.com/Mp0s1AP.jpg">
+                        </div>
+                        <div class="candidate-desc">
+                            <div class="candidate-nickname">creator_god</div>
+                            <div class="candidate-issue">회원님을 만들었습니다.</div>
+                        </div>
+                        <button class="follow-button">
+                            <span>팔로우</span>
+                        </button>
+                    </div>
+                    <div class="suggestion-candidate">
+                        <div class="candidate-img">
+                            <img src="https://i.imgur.com/nOQxE7S.jpg">
+                        </div>
+                        <div class="candidate-desc">
+                            <div class="candidate-nickname">corejemjem1522</div>
+                            <div class="candidate-issue">회원님을 팔로우합니다.</div>
+                        </div>
+                        <button class="follow-button">
+                            <span>팔로우</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="suggestion-candidate">
-                    <div class="candidate-img">
-                        <img src="https://i.imgur.com/FMKfMwv.png">
-                    </div>
-                    <div class="candidate-desc">
-                        <div class="candidate-nickname">lovely_kitty</div>
-                        <div class="candidate-issue">회원님을 유혹하려합니다.</div>
-                    </div>
-                    <button class="follow-button">
-                        <span>팔로우</span>
-                    </button>
-                </div>
-                <div class="suggestion-candidate">
-                    <div class="candidate-img">
-                        <img src="https://i.imgur.com/yj8JnrI.jpg">
-                    </div>
-                    <div class="candidate-desc">
-                        <div class="candidate-nickname">fear_me365</div>
-                        <div class="candidate-issue">회원님을 조지려합니다.</div>
-                    </div>
-                    <button class="follow-button">
-                        <span>팔로우</span>
-                    </button>
-                </div>
-                <div class="suggestion-candidate">
-                    <div class="candidate-img">
-                        <img src="https://i.imgur.com/Mp0s1AP.jpg">
-                    </div>
-                    <div class="candidate-desc">
-                        <div class="candidate-nickname">creator_god</div>
-                        <div class="candidate-issue">회원님을 만들었습니다.</div>
-                    </div>
-                    <button class="follow-button">
-                        <span>팔로우</span>
-                    </button>
-                </div>
-                <div class="suggestion-candidate">
-                    <div class="candidate-img">
-                        <img src="https://i.imgur.com/nOQxE7S.jpg">
-                    </div>
-                    <div class="candidate-desc">
-                        <div class="candidate-nickname">corejemjem1522</div>
-                        <div class="candidate-issue">회원님을 팔로우합니다.</div>
-                    </div>
-                    <button class="follow-button">
-                        <span>팔로우</span>
-                    </button>
-                </div>
-            </div>
 
-            <div style="text-align: left; margin-top: 16px;">
-                <div style="color:darkgray; font-size:10px;">소개 · 도움말 · 홍보센터 · API · 채용정보</div>
-                <div style="color:darkgray; font-size:10px;">개인정보 처리방침 · 약관 · 위치 · 인기 계정 · 해시태그 · 언어</div>
-                <div>　</div>
-                <div style="color:darkgray; font-size:10px;">ⓒ 2021 Westagram from Meta</div>
+                <div id="TMI">
+                    <div>소개 · 도움말 · 홍보센터 · API · 채용정보</div>
+                    <div>개인정보 처리방침 · 약관 · 위치 · 인기 계정 · 해시태그 · 언어</div>
+                    <div>　</div>
+                    <div>ⓒ 2021 Westagram from Meta</div>
+                </div>
             </div>
         </div>
     </div>
