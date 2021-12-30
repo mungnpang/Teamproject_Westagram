@@ -15,7 +15,7 @@ db = client.dbwesta
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
+app.config['UPLOAD_FOLDER'] = "./static/media/"
 
 SECRET_KEY = 'SPARTA'
 
@@ -35,25 +35,46 @@ def email_check(email):
     return bool(db.users.find_one({'email': email}))
 
 
+@app.route('/mypage', methods=['GET','POST'])
+def profile_img():
+    valid = valid_token()
+    if type(valid) == dict:
+        if request.method == 'GET':
+            return render_template('mypage.html')
+        else:
+            file = request.files['file']
+            img_name = uuid4().hex
+            file.save('./static/media/profile_img/' + img_name)
+            img_id = '../static/media/profile_img/' + img_name
+            db.users.update_one({'email':valid['id']}, {'$profile_img':img_id})
+            return jsonify({'result':'success'})
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/')
 def main():
     valid = valid_token()
     if type(valid) == dict:
-        return render_template('index.html')
+        feeds = list(db.feeds.find({}, {'_id':False, 'email':False}))
+        return render_template('index.html', feeds=feeds)
     else:
         return redirect(url_for('login'))
 
 
 @app.route('/api/feeds', methods=['POST'])
 def upload_feed():
+    valid = valid_token()
     file = request.files['file']
-    temp_image = request.form['image']
-    image = uuid4().hex
+    img_name = uuid4().hex
     desc = request.form['desc']
-    user_id = request.form['user_id']
-    profile_image = request.form['profile_image']
+    target = db.users.find_one({'email':valid['id']})
+    profile_img = '../static/img/westagram-logo.jpg'
 
-    doc = {'file':file, 'image':image, 'desc':desc, 'user_id':user_id, 'profile_image':profile_image}
+    file.save('./static/media/feeds/' + img_name)
+    img_id = '../static/media/feeds/' + img_name
+
+    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':profile_img}
     db.feeds.insert_one(doc)
 
     return jsonify({'result': 'success'})
