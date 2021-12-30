@@ -1,21 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../static/login_style.css">
 </head>
 
+<body>
+    <div class="screen">
+        <div class="login-form">
+            <div class="logo-box"><img id="westa-logo" src="../static/img/westagram-logo.jpg"></div>
+            <div id="login-subtitle">
+                <div><h3>일상을 공유하는 즐거움과 함께</h3></div>
+                <div id="subtitle-2"><h3>추억을 간직해 보세요</h3></div>
+            </div>
+
+            <div class="input-container">
+                <input id="email-input" type="text" name="email" placeholder="이메일 주소">
+                <input id="password-input" type="text" name="password" placeholder="비밀번호">
+            </div>
+            <div id="login-button">
+                <button onclick="login()">로그인</button>
+            </div>
+        </div>
+
+        <div class="join-footer"><h4>회원이 아니신가요?　<a href="/join">가입하기</a></h4></div>
+
+    </div>
+
     <script>
-        $('#join_button').click(function (){
-        let email = $('#input_email').val();
-        let password = $('#input_password').val();
+        function login(){
+        let email = $('#email-input').val();
+        let password = $('#password-input').val();
         console.log(email, password);
             $.ajax({
                 url: "/login",
@@ -26,9 +44,9 @@
                 method: 'POST',
                 dataType: 'json',
                 success: function (response){
-                    console.log(response);
-                    alert(response['msg'])
-                    location.replace('/')
+                    $.cookie('wetoken', response['token'], {path: '/'});
+                        console.log(response);
+                        location.replace('/')
                 },
                 error: function (request, status, error) {
                     alert('이메일 계정 혹은 비밀번호가 올바르지 않습니다')
@@ -38,40 +56,8 @@
                     console.log("완료");
                 }
             });
-        });
+        };
     </script>
-<body style="background: rgb(245,245,245)">
-    <div style="text-align: center; width: 400px; height: 500px; border: solid 1px gray; margin: 100px auto 20px auto; background: white;">
-        <div style="width: 360px; height: 500px; margin: 50px auto 50px auto;">
-            <div><img style="width: 160px; margin-bottom:20px;" src="https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png"></div>
-            <div style="color: gray; font-weight: bolder; margin-bottom: 60px;"> 친구들의 사진과 동영상을 보려면 가입하세요 </div>
-            
-            <div class="form-floating mb-3">
-                <input style="width: 300px; height: 24px; margin: auto;" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label style="font-size: 13px; padding: 4px 10px; margin-left: 30px; margin-top: 2px;" for="floatingInput">휴대폰 번호 또는 이메일 주소</label>
-            </div>
 
-            <div class="form-floating mb-3">
-                <input style="width: 300px; height: 24px; margin: auto;" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label style="font-size: 13px; padding: 4px 10px; margin-left: 30px; margin-top: 2px;" for="floatingInput">비밀 번호</label>
-            </div>
-            <button style="width: 300px; height: 32px; margin: auto; font-size: 14px; font-weight: bolder; margin-top: 8px;" type="button" class="btn btn-primary">로그인</button>
-        </div>
-    </div>
-
-    <div style="text-align: center; width: 400px; height: 80px; border: solid 1px gray; margin: 20px auto 100px auto; background: white;">
-        <div style="margin: 28px auto 28px auto;">계정이 없으신가요? <a href="join">가입하기</a></div>
-    </div>
-    
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
-    </body>
+</body>
 </html>
