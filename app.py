@@ -93,7 +93,6 @@ def join():
         temp_password = request.form['password']
         password = hashlib.sha256(temp_password.encode('utf-8')).hexdigest()
 
-
         #이메일 유효성 검사
         if (re.search('[^a-zA-Z0-9-_.@]+', email) is not None
                 or not (9 < len(email) < 26)):
