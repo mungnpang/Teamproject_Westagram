@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mypage</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="../static/mypage_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+</head>
+
+<body>
+    <div class="desktop-screen">
+        <div class="desktop-background"></div>
+        <div class="desktop-header">
+            <div class="header-wrap">
+                <div id="desktop-logo"></div>
+                <div id="search-bar"><input type="text" placeholder="검색"></div>
+                <div id="desktop-navi">
+                    <div class="home"></div>
+                    <div class="dm"></div>
+                    <div class="trending"></div>
+                    <div class="bookmark"></div>
+                    <div class="more-info"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal_overlay" id="first_modal">
+            <div class="modal_window">
+                <div class="modal_header">
+                    <div class="modal_blank"> </div>
+                    <div class="modal_title">새 이미지 업로드</div>
+                    <div><span class="material-icons-outlined">close</span></div>
+                </div>
+                <div class="img_upload_space"><span id="upload_feed_text">사진을 여기에 끌어다 놓으세요</span></div>
+            </div>
+        </div>
+
+        <div class="modal_overlay" id="second_modal">
+            <div class="modal_window">
+                <div class="modal_header">
+                    <div class="modal_blank"> </div>
+                    <div class="modal_title">새 이미지 업로드</div>
+                    <div><span class="material-icons-outlined">close</span></div>
+                </div>
+                <div class="upload_feed_container">
+                    <div id="second_img_area"></div>
+                    <div class="img_description">
+                        <textarea id="feed_desc" rows="7"></textarea>
+                        <div id="feed_create_button">
+                            <button>공유하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="all-items">
+            <div class="mypage-profile-container">
+                <div class="mypage-profile-img">
+                    <img src="../static/img/default-user-img.png">
+                </div>
+                <div class="mypage-myprofile">
+                    <h1>{{ id }}</h1>
+                    <h2>{{ name }}</h2>
+                    <h3>게시물 2</h3>
+                </div>
+                <div id="profile-blank">　</div>
+            </div>
+
+            <div class="mypage-feeds-container">
+                <div class="mypage-feeds-tab">
+                    <div id="mypage-myfeeds"><span class="material-icons-outlined">apps</span>게시물</div>
+                    <div id="mypage-favorites"><span class="material-icons-outlined">bookmark_border</span>저장됨</div>
+                </div>
+                {% for feed in my_feeds%}
+                <div class="mypage-feeds">
+                    <div class="feeds-preview">
+                        <div class="mypage-feed-pic"><img onclick="window.open('/','팝업', 'width=500,height=500)"src={{feed.image_id}}></div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="mypage-favorite-feeds">
+                    <div class="favorite-feeds-preview"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

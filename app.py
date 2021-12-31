@@ -8,9 +8,12 @@ import jwt
 import hashlib
 import re
 import os
+import certifi
+
+ca = certifi.where()
 
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.qjo3f.mongodb.net/Cluster0?retryWrites=true&w=majority')
+client = MongoClient('mongodb+srv://test:sparta@cluster0.rrds9.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbwesta
 
 app = Flask(__name__)
@@ -30,25 +33,29 @@ def valid_token():
     except jwt.exceptions.DecodeError:
         return "로그인 정보가 존재하지 않습니다."
 
+
 def email_check(email):
     return bool(db.users.find_one({'email': email}))
 
 
-# @app.route('/mypage', methods=['GET','POST'])
-# def profile_img():
-#     valid = valid_token()
-#     if type(valid) == dict:
-#         if request.method == 'GET':
-#             return render_template('mypage.html')
-#         else:
-#             file = request.files['file']
-#             img_name = uuid4().hex
-#             file.save('./static/media/profile_img/' + img_name)
-#             img_id = '../static/media/profile_img/' + img_name
-#             db.users.update_one({'email':valid['id']}, {'$profile_img':img_id})
-#             return jsonify({'result':'success'})
-#     else:
-#         return redirect(url_for('login'))
+@app.route('/mypage', methods=['GET','POST'])
+def profile_img():
+    valid = valid_token()
+    if type(valid) == dict:
+        if request.method == 'GET':
+            target = db.users.find_one({'email': valid['id']})
+            my_nickname = target['nickname']
+            my_feeds = list(db.feeds.find({'nickname': my_nickname}))
+            return render_template('mypage.html', my_feeds=my_feeds, name=target['name'], id=valid['id'])
+        else:
+            file = request.files['file']
+            img_name = uuid4().hex
+            file.save('./static/media/profile_img/' + img_name)
+            img_id = '../static/media/profile_img/' + img_name
+            db.users.update_one({'email':valid['id']}, {'$profile_img':img_id})
+            return jsonify({'result':'success'})
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/')
@@ -145,6 +152,17 @@ def login():
 @app.route('/login', methods=['POST'])
 def logout():
     return jsonify({'result': 'success'})
+
+# @app.route('/mypage')
+# def my_page():
+#     valid = valid_token()
+#     if type(valid) == dict:
+#         target = db.users.find_one({'email': valid['id']})
+#         my_nickname = target['nickname']
+#         my_feeds = list(db.feeds.find({'nickname': my_nickname}))
+#         return render_template('mypage.html', my_feeds=my_feeds)
+#     else:
+#         return render_template('login.html')
 
 
 
