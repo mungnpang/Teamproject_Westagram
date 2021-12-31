@@ -49,11 +49,15 @@
                 method: 'POST',
                 dataType: 'json',
                 success: function (response){
-                    console.log(response);
-                    alert(response['msg'])
-                    location.replace('login')
+                    if (response['result']=='success'){
+                        console.log(response);
+                        alert(response['msg'])
+                        location.replace('login')
+                    }else{
+                        alert(response['msg'])
+                    }
                 },
-                error: function (request, status, error) {
+                error: function () {
                     console.log("에러");
                 },
                 complete: function () {

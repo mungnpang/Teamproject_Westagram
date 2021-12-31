@@ -131,8 +131,8 @@
     </div>
 
     <div class="all-items">
-        {% for feed in feeds %}
         <div class="contents-line">
+            {% for feed in feeds %}
             <div class="desktop-feed-box">
                 <div class="desktop-feed-head">
                     <div class="desktop-user-profile">
@@ -142,7 +142,7 @@
                     <div class="feed-more-info"></div>
                 </div>
 
-                <div id="desktop-feed-pic"><img src="{{ feed.image_id }}"</div>
+                <div id="desktop-feed-pic"><img src="{{ feed.image_id }}"></div>
 
                 <div class="desktop-feed-bottom">
                     <div class="desktop-feed-footer">
@@ -163,9 +163,10 @@
                     <div class="desktop-time-checker">5시간 전</div>
                 </div>
             </div>
-            <div class="desktop-blank"></div>
+{#            <div class="desktop-blank"></div>#}
+            {% endfor %}
         </div>
-        {% endfor %}
+
 
 
         <div class="user-suggestion-line">
