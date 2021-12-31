@@ -48,9 +48,9 @@
 .mypage-feeds-container .mypage-feeds-tab{width:35%; height:3vh; margin: auto; display:flex;}
 .mypage-feeds-container .mypage-feeds-tab div{display:flex; flex:1; justify-content:center; align-items:center; cursor:pointer;}
 .mypage-feeds-container .mypage-feeds{width:90%; margin:3vh auto; display:flex; justify-content:space-between; align-items:center;}
-.mypage-feeds-container .mypage-feeds .feeds-preview{margin:auto; -webkit-column-count: 3; -moz-column-count: 3; column-count: 3; -moz-column-gap: 1em; -webkit-column-gap: 1em; column-gap: 1em;}
-.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic{flex:1; display:flex; justify-content:space-between; align-items:center;}
-.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic img{width:88%; height:100%; flex:1; padding:5%; object-fit:cover;}
+.mypage-feeds-container .mypage-feeds .feeds-preview{width:100%; margin: 1vh auto; display:flex; flex-flow:wrap;}
+.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic{width:33%; margin:auto;}
+.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic img{width:85%; height:100%; padding:5%; object-fit:cover;}
 
 
 @media (max-width: 981px) {

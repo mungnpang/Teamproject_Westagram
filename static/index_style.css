@@ -78,8 +78,8 @@
 .all-items{width:55vw; margin:auto; display:flex; justify-content:space-between;}
 
 .contents-line{width:32vw;}
-.desktop-feed-box{margin: 8vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); opacity: 0.9; border-radius:2%;}
-.desktop-feed-head {width: 100%; height: 8vh; display: flex; align-items: center; justify-content: space-between;}
+.desktop-feed-box{margin: 8vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); border-radius:2%;}
+.desktop-feed-head {width: 100%; height: 8vh; opacity:0.9; display: flex; align-items: center; justify-content: space-between;}
 .desktop-feed-head .desktop-user-profile {display: flex; align-items: center; padding: 2%; color:rgb(15,15,15)}
 .desktop-feed-head .desktop-user-profile #desktop-user-pic1 {width: 2vw; height: 4vh; background: url("https://i.imgur.com/IXic2Jl.jpg"); background-size: cover; background-position: center; border-radius: 100%;}
 .desktop-feed-head .feed-more-info {width: 1vw; height: 2vh; margin-right: 3vh; background: url("./img/more@3x.png"); background-size: contain; background-repeat: no-repeat; background-position: center;}
@@ -87,8 +87,7 @@
 #desktop-feed-pic img {width:100%; height:100%; object-fit:cover;}
 
 
-
-.desktop-feed-bottom {width:100%; height:24vh;}
+.desktop-feed-bottom {width:100%; height:24vh; opacity:0.9;}
 .desktop-feed-footer {width:100%; height: 7vh; display: flex; justify-content: space-between; align-items:center;}
 .desktop-feed-footer .desktop-feed-icons {width: 95%; height: 8vh; display: flex; align-items:center; margin-left:1vw; color:rgb(15,15,15)}
 .desktop-feed-footer .desktop-feed-icons .desktop-feed-like {width: 2vw; height: 4vh; background: url("./img/like@3x.png"); background-size: contain; background-repeat: no-repeat; background-position: center; border: none;}
@@ -102,7 +101,6 @@
 .desktop-feed-reply {margin-left: 1vw; color:rgb(15,15,15)}
 .desktop-time-checker {margin: 5vh 1vw; font-size: small; color: gray;}
 .desktop-blank{height:10vh;}
-
 
 
 .user-suggestion-line {width:20vw; margin-top:9vh; position:fixed; top:0; left:58%;}

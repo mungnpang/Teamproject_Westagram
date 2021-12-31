@@ -30,7 +30,6 @@ def valid_token():
     except jwt.exceptions.DecodeError:
         return "로그인 정보가 존재하지 않습니다."
 
-
 def email_check(email):
     return bool(db.users.find_one({'email': email}))
 
