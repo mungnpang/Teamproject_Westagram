@@ -85,16 +85,68 @@ def upload_feed():
     file = request.files['file']
     img_name = uuid4().hex
     desc = request.form['desc']
-    target = db.users.find_one({'email':valid['id']})
-    email = target['email']
-
+    email = valid['id']
+    target = db.users.find_one({'email': email})
     file.save('./static/media/feeds/' + img_name)
     img_id = '../static/media/feeds/' + img_name
-
-    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':target['profile_img'], 'email':email}
+    all_feeds = list(db.feeds.find({}, {'_id': False}))
+    index = len(all_feeds)
+    like_list = []
+    like = -1
+    comment_list = []
+    now = datetime.now()
+    now_date = now.strftime('%Y-%m-%d %H:%M')
+    doc = {'comment_list': comment_list, 'email':email, 'index': index, 'image_id': img_id, 'desc': desc, 'nickname': target['nickname'], 'like_list': like_list, 'like':like, 'time': now_date}
     db.feeds.insert_one(doc)
-
     return jsonify({'result': 'success'})
+
+
+@app.route('/api/comment', methods=['POST'])
+def comment():
+    valid = valid_token()
+    if type(valid) == dict:
+        index_receive = request.form['index_give']
+        comment = request.form['comment_give']
+        target = db.feeds.find_one({'index': int(index_receive)})
+        comment_list = target['comment_list']
+        email = valid['id']
+        target = db.users.find_one({'email': email})
+        my_nickname = target['nickname']
+        my_comment = {'my_nickname': my_nickname, 'comment': comment}
+        comment_list.append(my_comment)
+        db.feeds.update_one({'index': int(index_receive)}, {'$set': {'comment_list': comment_list}})
+        return jsonify({'result':'success'})
+    else:
+        return redirect(url_for('/login'))
+
+
+@app.route('/api/like', methods=['POST'])
+def like():
+    valid = valid_token()
+    if type(valid) == dict:
+        index_receive = request.form['index_give']
+        target = db.feeds.find_one({'index': int(index_receive)})
+        like_list = target['like_list']
+        email = valid['id']
+
+        if email not in like_list:
+            like_list.append(email)
+            db.feeds.update_one({'index': int(index_receive)}, {'$set': {'like_list': like_list}})
+            like_count = len(like_list) - 1
+            temp = like_list[0]
+            target_user = db.users.find_one({'email': temp})
+            nickname = target_user['nickname']
+            db.feeds.update_one({'index': int(index_receive)}, {'$set': {'like_nickname': nickname}})
+            db.feeds.update_one({'index': int(index_receive)}, {'$set': {'like': like_count}})
+            return jsonify({'result': 'success', 'msg': '좋아요 완료!'})
+        else:
+            like_list.remove(email)
+            like_count = len(like_list) - 1
+            db.feeds.update_one({'index': int(index_receive)}, {'$set': {'like_list': like_list}})
+            db.feeds.update_one({'index': int(index_receive)}, {'$set': {'like': like_count}})
+            return jsonify({'msg': '좋아요 취소!'})
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/join', methods=['GET', 'POST'])

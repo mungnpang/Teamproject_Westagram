@@ -8,7 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link rel="stylesheet" href="../static/index_style.css">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-
 </head>
 
 <body>
@@ -133,37 +132,58 @@
     <div class="all-items">
         <div class="contents-line">
             {% for feed in feeds %}
-            <div class="desktop-feed-box">
-                <div class="desktop-feed-head">
-                    <div class="desktop-user-profile">
-                        <div id="desktop-user-pic1"><img src="{{ my_profile_img }}"></div>
-                        <p><span style="font-weight: bolder;">　{{ feed.nickname }}</span></p>
-                    </div>
-                    <div class="feed-more-info"></div>
-                </div>
-
-                <div id="desktop-feed-pic"><img src="{{ feed.image_id }}"></div>
-
-                <div class="desktop-feed-bottom">
-                    <div class="desktop-feed-footer">
-                        <div class="desktop-feed-icons">
-                            <div class="desktop-feed-like"></div>
-                            <div class="desktop-feed-comment"></div>
-                            <div class="desktop-feed-dm"></div>
+                <div class="desktop-feed-box">
+                    <div class="desktop-feed-head">
+                        <div class="desktop-user-profile">
+                            <div id="desktop-user-pic1"><img src="{{ my_profile_img }}"></div>
+                            <p><span style="font-weight: bolder;">　{{ feed.nickname }}</span></p>
                         </div>
-                        <div class="desktop-save-feed"></div>
+                        <div class="feed-more-info"></div>
                     </div>
 
-                    <div class="desktop-feed-profile">
-                        <div id="desktop-feed-user-pic"></div>
-                        <p><span style="font-weight: bolder;">　{{ feed.nickname }}</span>님 <span style="font-weight:bolder;">외 5,671명</span>이 좋아합니다</p>
-                    </div>
+                    <div id="desktop-feed-pic"><img src="{{ feed.image_id }}"></div>
 
-                    <div class="desktop-feed-reply"><span style="font-weight: bolder;">{{ feed.nickname }}</span> {{ feed.desc }}</div>
-                    <div class="desktop-time-checker">5시간 전</div>
+                    <div class="desktop-feed-bottom">
+                        <div class="desktop-feed-footer">
+                            <div class="desktop-feed-icons">
+                                <button onclick="like_done()" type="button" class="desktop-feed-like"></button>
+                                <input class="feed-index" value="{{ feed.index }}">
+                                <div class="desktop-feed-dm"></div>
+                            </div>
+                            <div class="desktop-save-feed"></div>
+                        </div>
+
+                        {% if feed.like|int == -1 %}
+                        {% elif feed.like|int == 0 %}
+                            <div class="desktop-feed-profile">
+                                <div id="desktop-feed-user-pic"><img src="{{ my_profile_img }}"></div>
+                                <input class="comment-index" value="{{ feed.like_nickname }}">
+                                <p class="who-like-it"><span style="font-weight:bolder;">{{ feed.like_nickname }}</span>님이 좋아합니다</p>
+                            </div>
+                        {% else %}
+                            <div class="desktop-feed-profile">
+                                <div id="desktop-feed-user-pic"><img src="{{ my_profile_img }}"></div>
+                                <input class="comment-index" value="{{ feed.like_nickname }}">
+                                <p class="who-like-these"><span style="font-weight:bolder;">{{ feed.like_nickname }}</span>님 외<span style="font-weight:bolder;">{{ feed.like }}명</span>이 좋아합니다</p>
+                            </div>
+                        {% endif %}
+                        <div class="desktop-feed-reply"><span
+                                style="font-weight: bolder;">{{ feed.nickname }}</span> {{ feed.desc }}</div>
+                        <div class="desktop-more-feed-reply">
+                            {% for comment in feed.comment_list %}
+                                <div class="more-feed-reply"><span
+                                        style="font-weight:bolder">{{ comment.my_nickname }}</span> {{ comment.comment }}
+                                </div>
+                            {% endfor %}
+                        <div class="desktop-time-checker">{{ feed.time }}</div>
+                        <div class="comment-container">
+                            <input class="comment-box" placeholder="댓글 달기...">
+                            <button onclick="comment_done()">게시</button>
+                        </div>
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-{#            <div class="desktop-blank"></div>#}
             {% endfor %}
         </div>
 
@@ -270,12 +290,12 @@
 
     function logout() {
         $.removeCookie('wetoken')
-            alert('안전하게 로그아웃 되었습니다')
-            location.replace('/login')
+        alert('안전하게 로그아웃 되었습니다')
+        location.replace('/login')
     }
 
     function backhome() {
-            location.replace('/')
+        location.replace('/')
     }
 
     function mypage() {
@@ -374,7 +394,35 @@
         }
     }
 
+    function like_done() {
+        let index = $('.feed-index').val()
 
+        $.ajax({
+            type: 'POST',
+            url: '/api/like',
+            data: {index_give: index},
+            dataType: 'json',
+            success: function (response) {
+                alert(response['msg'])
+                location.replace('/')
+            }
+        });
+    }
+
+    function comment_done() {
+        let index = $('.feed-index').val()
+        let comment = $('.comment-box').val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/comment',
+            data: {index_give: index, comment_give: comment},
+            dataType: 'json',
+            success: function (response) {
+                location.replace('/')
+            }
+        });
+    }
 
 </script>
 

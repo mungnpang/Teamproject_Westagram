@@ -78,7 +78,7 @@
 .all-items{width:55vw; margin:auto; display:flex; justify-content:space-between;}
 
 .contents-line{width:32vw;}
-.desktop-feed-box{margin: 8vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); border-radius:2%;}
+.desktop-feed-box{margin: 8vh auto; width: 32vw; background:rgb(235,235,235); border-radius:2%;}
 .desktop-feed-head {width: 100%; height: 8vh; opacity:0.9; display: flex; align-items: center; justify-content: space-between;}
 .desktop-feed-head .desktop-user-profile {display: flex; align-items: center; padding: 2%; color:rgb(15,15,15)}
 .desktop-feed-head .desktop-user-profile #desktop-user-pic1 {width: 2vw; height: 4vh; border-radius:100%; overflow: hidden;}
@@ -88,7 +88,7 @@
 #desktop-feed-pic img {width:100%; height:100%; object-fit:cover;}
 
 
-.desktop-feed-bottom {width:100%; height:24vh; opacity:0.9;}
+.desktop-feed-bottom {width:100%; opacity:0.9;}
 .desktop-feed-footer {width:100%; height: 7vh; display: flex; justify-content: space-between; align-items:center;}
 .desktop-feed-footer .desktop-feed-icons {width: 95%; height: 8vh; display: flex; align-items:center; margin-left:1vw; color:rgb(15,15,15)}
 .desktop-feed-footer .desktop-feed-icons .desktop-feed-like {width: 2vw; height: 4vh; background: url("./img/like@3x.png"); background-size: contain; background-repeat: no-repeat; background-position: center; border: none;}
@@ -97,10 +97,19 @@
 .desktop-feed-footer .desktop-save-feed {width: 2vw; height: 4vh; background: url("./img/favorite@3x.png"); background-size: contain; background-repeat: no-repeat; background-position: center; border: none; margin-right:1vw;}
 
 .desktop-feed-profile {display: flex; align-items: center; margin-left: 1vw; color:rgb(15,15,15)}
-.desktop-feed-profile #desktop-feed-user-pic {width: 2vw; height: 3vh; background: url("https://i.imgur.com/IXic2Jl.jpg"); background-size: cover; background-position: center; border-radius: 100%;}
+.desktop-feed-profile #desktop-feed-user-pic {width:1.8vw; height:3vh; border-radius: 100%; overflow:hidden;}
+.desktop-feed-profile #desktop-feed-user-pic img {width:100%; height:100%; object-fit:cover;}
+.desktop-feed-profile p {margin-left:0.5vw;}
 
-.desktop-feed-reply {margin-left: 1vw; color:rgb(15,15,15)}
-.desktop-time-checker {margin: 5vh 1vw; font-size: small; color: gray;}
+.desktop-feed-reply {margin-left: 1vw; margin-bottom:1vh; color:rgb(15,15,15)}
+.desktop-time-checker {margin:3vh auto 2vh 1vw; font-size: small; color: gray;}
+.feed-index {display:none;}
+.comment-index {display:none;}
+.comment-container {width:30vw; height:5vh; margin: 2vh 1vw; display:flex; align-items:center;}
+.comment-box {width:90%; height:3vh; border:1px solid gray; outline:none;}
+.comment-container button{height:3.5vh; cursor:pointer;}
+.more-feed-reply {margin-left:1vw;}
+.desktop-more-feed-reply .more-feed-reply{margin-bottom:1vh;}
 .desktop-blank{height:10vh;}
 
 
