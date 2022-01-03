@@ -48,12 +48,12 @@
 
 .desktop-header{width:100vw; height:6vh; position:fixed; top:0; left:0; z-index:3; background:white;}
 .desktop-header .header-wrap{width:54vw; margin:auto; display:flex; justify-content:space-between; align-items:center;}
-.desktop-header #desktop-logo{background:url("../static/img/westagram-logo.jpg"); background-size:contain; background-repeat:no-repeat; background-position:center; width:9vw; height:6vh;}
+.desktop-header #desktop-logo{background:url("../static/img/westagram-logo.jpg"); background-size:contain; background-repeat:no-repeat; background-position:center; width:9vw; height:6vh; cursor:pointer;}
 .desktop-header #search-bar{width:18vw; height:4vh; border:1px solid lightgray; background:rgb(245, 245, 245); display:flex; justify-content:center; align-content:center;}
 .desktop-header #search-bar input{width:17vw; font-size:medium; padding:1%; outline:none; border:none; background:rgb(245, 245, 245);}
 .desktop-header #desktop-navi{width:14vw; display:flex; justify-content: space-between;}
 .desktop-header #desktop-navi div{cursor:pointer;}
-.desktop-header #desktop-navi .home{width:2vw; height:3vh; background: url("./img/home@3x.png"); background-size:contain; background-repeat:no-repeat; background-position:center; border:none;}
+.desktop-header #desktop-navi .home{width:2vw; height:3vh; background: url("./img/home@3x.png"); background-size:contain; background-repeat:no-repeat; background-position:center; border:none; cursor:pointer;}
 .desktop-header #desktop-navi .dm{width:2vw; height:3vh; background: url("./img/dm@3x.png"); background-size:contain; background-repeat:no-repeat; background-position:center; border:none;}
 .desktop-header #desktop-navi .trending{width:2vw; height:3vh; background: url("./img/trending@3x.png"); background-size:contain; background-repeat:no-repeat; background-position:center; border:none;}
 .desktop-header #desktop-navi .bookmark{width:2vw; height:3vh; background: url("./img/favorite@3x.png"); background-size:contain; background-repeat:no-repeat; background-position:center; border:none;}
@@ -81,7 +81,8 @@
 .desktop-feed-box{margin: 8vh auto; width: 32vw; height: 86vh; background:rgb(235,235,235); border-radius:2%;}
 .desktop-feed-head {width: 100%; height: 8vh; opacity:0.9; display: flex; align-items: center; justify-content: space-between;}
 .desktop-feed-head .desktop-user-profile {display: flex; align-items: center; padding: 2%; color:rgb(15,15,15)}
-.desktop-feed-head .desktop-user-profile #desktop-user-pic1 {width: 2vw; height: 4vh; background: url("https://i.imgur.com/IXic2Jl.jpg"); background-size: cover; background-position: center; border-radius: 100%;}
+.desktop-feed-head .desktop-user-profile #desktop-user-pic1 {width: 2vw; height: 4vh; border-radius:100%; overflow: hidden;}
+.desktop-feed-head .desktop-user-profile #desktop-user-pic1 img {width:100%; height:100%; object-fit:cover;}
 .desktop-feed-head .feed-more-info {width: 1vw; height: 2vh; margin-right: 3vh; background: url("./img/more@3x.png"); background-size: contain; background-repeat: no-repeat; background-position: center;}
 #desktop-feed-pic {width: 100%; height: 50vh;}
 #desktop-feed-pic img {width:100%; height:100%; object-fit:cover;}
@@ -106,11 +107,11 @@
 .user-suggestion-line {width:20vw; margin-top:9vh; position:fixed; top:0; left:58%;}
 .user-suggestion-line .suggestion-container {width: 100%; height:53vh; background:rgb(15,15,15); opacity:0.9; padding:5%; border-radius:2%;}
 .user-suggestion-line .user-container {width:18vw; height:6vh; display:flex; flex-direction:row; text-align:start; align-items:center; margin:auto; padding:1%;}
-.user-suggestion-line .user-container .profile-img{width:3vw; height:5vh; border-radius:100%; overflow:hidden; flex:1;}
+.user-suggestion-line .user-container .profile-img{width:3vw; height:5vh; border-radius:100%; overflow:hidden; flex:1; cursor:pointer;}
 .user-suggestion-line .user-container .profile-img img{width:100%; height:100%; object-fit:cover;}
 .user-suggestion-line .user-container .profile-desc{flex:3; margin-left:1vw;}
-.user-suggestion-line .user-container .profile-desc .profile-nickname{color:white; font-size: larger;}
-.user-suggestion-line .user-container .profile-desc .profile-name{color:white; opacity:0.5;}
+.user-suggestion-line .user-container .profile-desc .profile-nickname{color:white; font-size: larger; cursor:pointer;}
+.user-suggestion-line .user-container .profile-desc .profile-name{color:white; opacity:0.5; cursor:pointer;}
 .user-suggestion-line .user-container #logout{width:100%; height:7vh; flex:2; border-style:none; background:transparent; justify-content: flex-end;}
 .user-suggestion-line .user-container #logout #logout-text{color: rgb(60, 111, 255); font-weight:bolder; font-size:medium; cursor:pointer;}
 

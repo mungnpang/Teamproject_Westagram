@@ -88,10 +88,10 @@
     <div class="desktop-background"></div>
     <div class="desktop-header">
         <div class="header-wrap">
-            <div id="desktop-logo"></div>
+            <div id="desktop-logo" onclick="backhome()"></div>
             <div id="search-bar"><input type="text" placeholder="검색"></div>
             <div id="desktop-navi">
-                <div class="home"></div>
+                <div class="home" onclick="backhome()"></div>
                 <div class="dm"></div>
                 <div class="trending"></div>
                 <div class="bookmark"></div>
@@ -136,7 +136,7 @@
             <div class="desktop-feed-box">
                 <div class="desktop-feed-head">
                     <div class="desktop-user-profile">
-                        <div id="desktop-user-pic1"></div>
+                        <div id="desktop-user-pic1"><img src="{{ my_profile_img }}"></div>
                         <p><span style="font-weight: bolder;">　{{ feed.nickname }}</span></p>
                     </div>
                     <div class="feed-more-info"></div>
@@ -172,12 +172,12 @@
         <div class="user-suggestion-line">
             <div class="suggestion-container">
                 <div class="user-container">
-                    <div class="profile-img">
-                        <img class="profile" src="https://i.imgur.com/IXic2Jl.jpg">
+                    <div class="profile-img" onclick="mypage()">
+                        <img class="profile" src="{{ my_profile_img }}">
                     </div>
                     <div class="profile-desc">
-                        <div class="profile-nickname">tomntoms</div>
-                        <div class="profile-name">톰사장</div>
+                        <div class="profile-nickname" onclick="mypage()">{{ my_nickname }}</div>
+                        <div class="profile-name" onclick="mypage()">{{ my_name }}</div>
                     </div>
                     <button onclick="logout()" id="logout">
                         <span id="logout-text">로그아웃</span>
@@ -272,6 +272,14 @@
         $.removeCookie('wetoken')
             alert('안전하게 로그아웃 되었습니다')
             location.replace('/login')
+    }
+
+    function backhome() {
+            location.replace('/')
+    }
+
+    function mypage() {
+        location.replace('/mypage')
     }
 
     $('.trending').click(function () {

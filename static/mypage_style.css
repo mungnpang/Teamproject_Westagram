@@ -8,7 +8,7 @@
 
 .desktop-header{width:100vw; height:6vh; position:fixed; top:0; left:0; z-index:3; background:white;}
 .desktop-header .header-wrap{width:54vw; margin:auto; display:flex; justify-content:space-between; align-items:center;}
-.desktop-header #desktop-logo{background:url("../static/img/westagram-logo.jpg"); background-size:contain; background-repeat:no-repeat; background-position:center; width:9vw; height:6vh;}
+.desktop-header #desktop-logo{background:url("../static/img/westagram-logo.jpg"); background-size:contain; background-repeat:no-repeat; background-position:center; width:9vw; height:6vh; cursor:pointer;}
 .desktop-header #search-bar{width:18vw; height:4vh; border:1px solid lightgray; background:rgb(245, 245, 245); display:flex; justify-content:center; align-content:center;}
 .desktop-header #search-bar input{width:17vw; font-size:medium; padding:1%; outline:none; border:none; background:rgb(245, 245, 245);}
 .desktop-header #desktop-navi{width:14vw; display:flex; justify-content: space-between;}
@@ -38,19 +38,22 @@
 .all-items{width:56vw; margin: 10vh auto; background:rgb(235,235,235); opacity: 0.9; border-radius:2%;}
 .mypage-profile-container{width:90%; height:24vh; padding:2%; margin:auto; border-bottom:1px solid gray; display:flex; justify-content:space-between;}
 .mypage-profile-container .mypage-profile-img{flex:2; display:flex; justify-content:center; align-items:center;}
-.mypage-profile-container .mypage-profile-img img{width:75; height:80%; border-radius:100%; object-fit:cover;}
+.mypage-profile-container .mypage-profile-img img{width:70%; height:80%; border-radius:100%; object-fit:cover;}
 .mypage-profile-container .mypage-myprofile{flex:3; margin:auto;}
-.mypage-profile-container .mypage-myprofile h1,h3{font-weight:lighter;}
-.mypage-profile-container .mypage-myprofile h2{position:relative; top:-2vh;}
-.mypage-profile-container #profile-blank{flex:1;}
+.mypage-profile-container .mypage-myprofile .p1-wrap{display:flex; justify-content:space-between; align-items:center;}
+.mypage-profile-container .mypage-myprofile .p1-wrap button{height:3vh; background:ghostwhite; border: 1px solid lightgray; border-radius:10%;}
+.mypage-profile-container .mypage-myprofile h1{font-weight:lighter;}
+.mypage-profile-container .mypage-myprofile h3{font-weight: bolder;}
+.mypage-profile-container .mypage-myprofile h4{font-weight:lighter; position:relative; top:-1vh;}
+.mypage-profile-container #profile-blank{flex:2;}
 
 .mypage-feeds-container{width:90%; padding:2%; margin:auto;}
 .mypage-feeds-container .mypage-feeds-tab{width:35%; height:3vh; margin: auto; display:flex;}
 .mypage-feeds-container .mypage-feeds-tab div{display:flex; flex:1; justify-content:center; align-items:center; cursor:pointer;}
-.mypage-feeds-container .mypage-feeds{width:90%; margin:3vh auto; display:flex; justify-content:space-between; align-items:center;}
+.mypage-feeds-container .mypage-feeds{width:90%; margin:3vh auto; display:flex; align-items:center;}
 .mypage-feeds-container .mypage-feeds .feeds-preview{width:100%; margin: 1vh auto; display:flex; flex-flow:wrap;}
-.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic{width:33%; margin:auto;}
-.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic img{width:85%; height:100%; padding:5%; object-fit:cover;}
+.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic{width:14vw; height:24vh; margin: 1vh auto; justify-content:center; align-content:center;}
+.mypage-feeds-container .mypage-feeds .feeds-preview .mypage-feed-pic img{width:90%; height:90%; padding:5%; object-fit:cover;}
 
 
 @media (max-width: 981px) {

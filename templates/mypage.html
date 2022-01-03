@@ -15,10 +15,10 @@
         <div class="desktop-background"></div>
         <div class="desktop-header">
             <div class="header-wrap">
-                <div id="desktop-logo"></div>
+                <div id="desktop-logo" onclick="backhome()"></div>
                 <div id="search-bar"><input type="text" placeholder="검색"></div>
                 <div id="desktop-navi">
-                    <div class="home"></div>
+                    <div class="home" onclick="backhome()"></div>
                     <div class="dm"></div>
                     <div class="trending"></div>
                     <div class="bookmark"></div>
@@ -60,12 +60,16 @@
         <div class="all-items">
             <div class="mypage-profile-container">
                 <div class="mypage-profile-img">
-                    <img src="../static/img/default-user-img.png">
+                    <img src="{{ my_profile_img }}">
                 </div>
                 <div class="mypage-myprofile">
-                    <h1>hellojacob0331</h1>
-                    <h2>김재명</h2>
-                    <h3>게시물 2</h3>
+                    <div class="p1-wrap">
+                        <h1> {{ my_nickname }}</h1>
+                        <button>프로필편집</button>
+                    </div>
+                    <h4>게시물 {{ my_feeds_num }}　　　팔로워 　　　팔로우</h4>
+                    <h3> {{ my_name }}</h3>
+                    <h4>인스타 잘 안합니당..ㅠㅠ</h4>
                 </div>
                 <div id="profile-blank">　</div>
             </div>
@@ -75,21 +79,29 @@
                     <div id="mypage-myfeeds"><span class="material-icons-outlined">apps</span>게시물</div>
                     <div id="mypage-favorites"><span class="material-icons-outlined">bookmark_border</span>저장됨</div>
                 </div>
+
                 <div class="mypage-feeds">
                     <div class="feeds-preview">
-                        <div class="mypage-feed-pic"><img src="../static/img/pic2.jpg"></div>
-                        <div class="mypage-feed-pic"><img src="../static/img/pic2.jpg"></div>
-                        <div class="mypage-feed-pic"><img src="../static/img/pic2.jpg"></div>
-                        <div class="mypage-feed-pic"><img src="../static/img/pic2.jpg"></div>
-                        <div class="mypage-feed-pic"><img src="../static/img/pic2.jpg"></div>
-
+                        {% for feed in my_feeds%}
+                        <div class="mypage-feed-pic">
+                            <img src="{{feed.image_id}}">
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
+
+
                 <div class="mypage-favorite-feeds">
                     <div class="favorite-feeds-preview"></div>
                 </div>
             </div>
         </div>
-    </div>
+
+    <script>
+        function backhome() {
+            location.replace('/')
+        }
+    </script>
+
 </body>
 </html>

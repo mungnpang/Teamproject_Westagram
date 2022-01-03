@@ -12,8 +12,7 @@ import certifi
 
 ca = certifi.where()
 
-
-client = MongoClient('mongodb+srv://test:sparta@cluster0.rrds9.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://test:sparta@cluster0.qjo3f.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbwesta
 
 app = Flask(__name__)
@@ -39,14 +38,14 @@ def email_check(email):
 
 
 @app.route('/mypage', methods=['GET','POST'])
-def profile_img():
+def mypage():
     valid = valid_token()
     if type(valid) == dict:
         if request.method == 'GET':
             target = db.users.find_one({'email': valid['id']})
-            my_nickname = target['nickname']
-            my_feeds = list(db.feeds.find({'nickname': my_nickname}))
-            return render_template('mypage.html', my_feeds=my_feeds, name=target['name'], id=valid['id'])
+            my_feeds = list(db.feeds.find({'nickname': target['nickname']}))
+            my_feeds_num = len(my_feeds)
+            return render_template('mypage.html', my_feeds=my_feeds,  my_feeds_num=my_feeds_num, my_name=target['name'], my_nickname=target['nickname'], my_profile_img=target['profile_img'])
         else:
             file = request.files['file']
             img_name = uuid4().hex
@@ -64,7 +63,9 @@ def main():
     if type(valid) == dict:
         feeds = list(db.feeds.find({}, {'_id':False, 'email':False}))
         feeds.reverse()
-        return render_template('index.html', feeds=feeds)
+        users = list(db.users.find({}, {'_id':False}))
+        target = db.users.find_one({'email': valid['id']})
+        return render_template('index.html', feeds=feeds, users=users, my_profile_img=target['profile_img'], my_nickname=target['nickname'], my_name=target['name'])
     else:
         return redirect(url_for('login'))
 
@@ -76,12 +77,11 @@ def upload_feed():
     img_name = uuid4().hex
     desc = request.form['desc']
     target = db.users.find_one({'email':valid['id']})
-    profile_img = '../static/img/westagram-logo.jpg'
 
     file.save('./static/media/feeds/' + img_name)
     img_id = '../static/media/feeds/' + img_name
 
-    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':profile_img}
+    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':target['profile_img']}
     db.feeds.insert_one(doc)
 
     return jsonify({'result': 'success'})
@@ -98,6 +98,9 @@ def join():
         nickname = request.form['nickname']
         temp_password = request.form['password']
         password = hashlib.sha256(temp_password.encode('utf-8')).hexdigest()
+        profile_img = '../static/media/profile_img/default-user-img.png'
+        follow = []
+        follower = []
 
         #이메일 유효성 검사
         if (re.search('[^a-zA-Z0-9-_.@]+', email) is not None
@@ -115,7 +118,7 @@ def join():
         # 중복 이메일 검사
         elif email_check(email):
             return jsonify({'result': 'error', 'msg': '가입된 내역이 있습니다.'})
-        doc = {'email':email, 'name':name, 'nickname':nickname, 'password':password}
+        doc = {'email':email, 'name':name, 'nickname':nickname, 'password':password, 'profile_img':profile_img, 'follow':follow, 'follower':follower}
 
         db.users.insert_one(doc)
 
