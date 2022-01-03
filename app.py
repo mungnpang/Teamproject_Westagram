@@ -1,3 +1,4 @@
+import werkzeug.middleware.lint
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from pymongo import MongoClient
 from flask.wrappers import Response
@@ -43,16 +44,24 @@ def mypage():
     if type(valid) == dict:
         if request.method == 'GET':
             target = db.users.find_one({'email': valid['id']})
-            my_feeds = list(db.feeds.find({'nickname': target['nickname']}))
+            my_feeds = list(db.feeds.find({'email': target['email']}))
             my_feeds_num = len(my_feeds)
-            return render_template('mypage.html', my_feeds=my_feeds,  my_feeds_num=my_feeds_num, my_name=target['name'], my_nickname=target['nickname'], my_profile_img=target['profile_img'])
+            return render_template('mypage.html', my_feeds=my_feeds,  my_feeds_num=my_feeds_num, my_name=target['name'], my_nickname=target['nickname'], my_profile_img=target['profile_img'], self_introduce=target['self_introduce'])
         else:
-            file = request.files['file']
-            img_name = uuid4().hex
-            file.save('./static/media/profile_img/' + img_name)
-            img_id = '../static/media/profile_img/' + img_name
-            db.users.update_one({'email':valid['id']}, {'$profile_img':img_id})
-            return jsonify({'result':'success'})
+            try:
+                file = request.files['file']
+                nickname = request.form['nickname']
+                self_introduce = request.form['self_introduce']
+                img_name = uuid4().hex
+                file.save('./static/media/profile_img/' + img_name)
+                img_id = '../static/media/profile_img/' + img_name
+                db.users.update_one({'email': valid['id']}, {'$set': {'profile_img': img_id, 'nickname': nickname, 'self_introduce': self_introduce}})
+                return jsonify({'result': 'success', 'msg':'성공적으로 반영 되었습니다!'})
+            except KeyError:
+                nickname = request.form['nickname']
+                self_introduce = request.form['self_introduce']
+                db.users.update_one({'email': valid['id']}, {'$set': {'nickname': nickname, 'self_introduce': self_introduce}})
+                return jsonify({'result': 'success', 'msg': '성공적으로 반영 되었습니다!'})
     else:
         return redirect(url_for('login'))
 
@@ -77,11 +86,12 @@ def upload_feed():
     img_name = uuid4().hex
     desc = request.form['desc']
     target = db.users.find_one({'email':valid['id']})
+    email = target['email']
 
     file.save('./static/media/feeds/' + img_name)
     img_id = '../static/media/feeds/' + img_name
 
-    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':target['profile_img']}
+    doc = {'image_id': img_id, 'desc':desc, 'nickname':target['nickname'], 'profile_img':target['profile_img'], 'email':email}
     db.feeds.insert_one(doc)
 
     return jsonify({'result': 'success'})
@@ -101,6 +111,7 @@ def join():
         profile_img = '../static/media/profile_img/default-user-img.png'
         follow = []
         follower = []
+        self_introduce = ''
 
         #이메일 유효성 검사
         if (re.search('[^a-zA-Z0-9-_.@]+', email) is not None
@@ -118,7 +129,7 @@ def join():
         # 중복 이메일 검사
         elif email_check(email):
             return jsonify({'result': 'error', 'msg': '가입된 내역이 있습니다.'})
-        doc = {'email':email, 'name':name, 'nickname':nickname, 'password':password, 'profile_img':profile_img, 'follow':follow, 'follower':follower}
+        doc = {'email':email, 'name':name, 'nickname':nickname, 'password':password, 'profile_img':profile_img, 'follow':follow, 'follower':follower, 'self_introduce':self_introduce}
 
         db.users.insert_one(doc)
 
@@ -155,19 +166,6 @@ def login():
 @app.route('/login', methods=['POST'])
 def logout():
     return jsonify({'result': 'success'})
-
-# @app.route('/mypage')
-# def my_page():
-#     valid = valid_token()
-#     if type(valid) == dict:
-#         target = db.users.find_one({'email': valid['id']})
-#         my_nickname = target['nickname']
-#         my_feeds = list(db.feeds.find({'nickname': my_nickname}))
-#         return render_template('mypage.html', my_feeds=my_feeds)
-#     else:
-#         return render_template('login.html')
-
-
 
 
 if __name__ == '__main__':
