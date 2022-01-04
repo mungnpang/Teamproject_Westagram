@@ -1,7 +1,7 @@
 # Teamproject_Westagram
 인스타그램 클론코딩 Westagram 프로젝트
 
-<img width=70%" src="![westagram-logo](https://user-images.githubusercontent.com/75291546/148011020-89d0bf96-66ff-4ee6-a211-42886cdd7fd3.jpg)" />
+![westagram-logo](https://user-images.githubusercontent.com/75291546/148011020-89d0bf96-66ff-4ee6-a211-42886cdd7fd3.jpg)
 
 
 http://sparta-bk.club/
